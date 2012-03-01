@@ -160,11 +160,7 @@ let s:rune_name = "german"
 " Functions {{{
 
 function! s:runes(name, char)
-  let l:table = s:runes[a:name]
-  if has_key(l:table, a:char)
-    return l:table[a:char]
-  endif
-  return a:char
+  return get(s:runes[a:name], a:char, a:char)
 endfunction
 
 function! s:start(...)
