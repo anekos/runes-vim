@@ -1,6 +1,6 @@
 ## ᚱᚢᛅᛖ-ᛒᛁᛗ
 
-For input rune characters.
+For input unicode rune characters.
 
 ## Command
 
