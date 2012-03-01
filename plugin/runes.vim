@@ -34,6 +34,8 @@
 
 scriptencoding utf-8
 
+" Rune Character Table {{{
+
 let s:runes = {
 \   'german': {
 \     'f': 'ᚠ',
@@ -136,9 +138,15 @@ let s:runes = {
 \}
 " G: N -> ng, T -> th
 
+" }}}
 
+" Variables {{{
 
 let s:rune_name = "german"
+
+" }}}
+
+" Functions {{{
 
 function! s:runes(name, char)
   let l:table = s:runes[a:name]
@@ -201,10 +209,20 @@ function! s:rune_name_completer(arg_lead, command_line, cursor_pos)
   return "german\nanglosaxon\ndenmark\nsweden"
 endfunction
 
+" }}}
+
+" Commands {{{
+
 command! -nargs=? -bang -complete=custom,<SID>rune_name_completer Runes call <SID>runes_command('!' == '<bang>', <q-args>)
+
+" }}}
+
+" Mappings {{{
 
 inoremap <Plug>(runes_toggle) <C-o>:call <SID>toggle()<CR>
 inoremap <Plug>(runes_start_german) <C-o>:call <SID>start("german")<CR>
 inoremap <Plug>(runes_start_anglosaxon) <C-o>:call <SID>start("anglosaxon")<CR>
 inoremap <Plug>(runes_start_denmark) <C-o>:call <SID>start("denmark")<CR>
 inoremap <Plug>(runes_start_sweden) <C-o>:call <SID>start("sweden")<CR>
+
+" }}}
