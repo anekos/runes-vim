@@ -159,7 +159,7 @@ let s:rune_name = "german"
 
 " Functions {{{
 
-function! s:runes(name, char)
+function! s:convert(name, char)
   return get(s:runes[a:name], a:char, a:char)
 endfunction
 
@@ -178,7 +178,7 @@ function! s:start(...)
   endif
 
   augroup anekos_runes
-    autocmd InsertCharPre <buffer> let v:char = s:runes(b:rune_name, v:char)
+    autocmd InsertCharPre <buffer> let v:char = s:convert(b:rune_name, v:char)
   augroup END
   echomsg "Rune Input Mode: on (" . b:rune_name . ")"
 endfunction
