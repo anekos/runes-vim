@@ -25,3 +25,18 @@ For input unicode rune characters.
     imap <C-z>d <Plug>(runes_start_denmark)
     imap <C-z>s <Plug>(runes_start_sweden)
 
+## User defined characters
+
+    let g:runes_table = {
+    \   'arrows': {
+    \     '1': '↙',
+    \     '2': '↓',
+    \     '3': '↘',
+    \     '4': '←',
+    \     '6': '→',
+    \     '7': '↖',
+    \     '8': '↑',
+    \     '9': '↗',
+    \   }
+    \ }
+

@@ -157,6 +157,16 @@ let s:rune_name = "german"
 
 " }}}
 
+" Merge User Defined Table {{{
+
+if exists('g:runes_table')
+  for name in keys(g:runes_table)
+    let s:runes[name] = g:runes_table[name]
+  endfor
+endif
+
+" }}}
+
 " Functions {{{
 
 function! s:convert(name, char)
@@ -215,14 +225,14 @@ function! s:runes_command(bang, name)
 endfunction
 
 function! s:rune_name_completer(arg_lead, command_line, cursor_pos)
-  return "german\nanglosaxon\ndenmark\nsweden"
+  return keys(s:runes)
 endfunction
 
 " }}}
 
 " Commands {{{
 
-command! -nargs=? -bang -complete=custom,<SID>rune_name_completer Runes call <SID>runes_command('!' == '<bang>', <q-args>)
+command! -nargs=? -bang -complete=customlist,<SID>rune_name_completer Runes call <SID>runes_command('!' == '<bang>', <q-args>)
 
 " }}}
 
