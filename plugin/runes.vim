@@ -225,7 +225,7 @@ function! s:runes_command(bang, name)
 endfunction
 
 function! s:rune_name_completer(arg_lead, command_line, cursor_pos)
-  return keys(s:runes)
+  return filter(keys(s:runes), 'stridx(v:val, a:arg_lead)==0')
 endfunction
 
 " }}}
