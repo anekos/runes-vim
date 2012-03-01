@@ -32,7 +32,18 @@
 " 
 " }}}
 
+" Mojo {{{
+
+if exists('g:anekos_runes_loaded')
+  finish
+endif
+
 scriptencoding utf-8
+
+let s:save_cpo = &cpo
+set cpo&vim
+
+" }}}
 
 " Rune Character Table {{{
 
@@ -224,5 +235,14 @@ inoremap <Plug>(runes_start_german) <C-o>:call <SID>start("german")<CR>
 inoremap <Plug>(runes_start_anglosaxon) <C-o>:call <SID>start("anglosaxon")<CR>
 inoremap <Plug>(runes_start_denmark) <C-o>:call <SID>start("denmark")<CR>
 inoremap <Plug>(runes_start_sweden) <C-o>:call <SID>start("sweden")<CR>
+
+" }}}
+
+" Mojo {{{
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
+
+let g:anekos_runes_loaded = 1
 
 " }}}
