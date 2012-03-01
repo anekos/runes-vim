@@ -175,19 +175,21 @@ function! s:start(...)
       echoerr "Unknown rune: " . a:1
       return
     endif
+    let b:rune_name = a:1
     let s:rune_name = a:1
+  else
+    let b:rune_name = s:rune_name
   endif
 
   augroup anekos_runes
-    autocmd!
-    autocmd InsertCharPre <buffer> let v:char = s:runes(s:rune_name, v:char)
+    autocmd InsertCharPre <buffer> let v:char = s:runes(b:rune_name, v:char)
   augroup END
-  echomsg "Rune Input Mode: on (" . s:rune_name . ")"
+  echomsg "Rune Input Mode: on (" . b:rune_name . ")"
 endfunction
 
 function s:stop()
   let b:anekos_runes_enabled = 0
-  autocmd! anekos_runes
+  autocmd! anekos_runes InsertCharPre <buffer>
   echomsg "Rune Input Mode: off"
 endfunction
 
