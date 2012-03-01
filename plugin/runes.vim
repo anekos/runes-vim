@@ -148,31 +148,52 @@ function! s:runes(name, char)
   return a:char
 endfunction
 
-function! s:toggle(...)
-  if !exists('b:anekos_runes_enabled')
-    let b:anekos_runes_enabled = 0
-  endif
+function! s:start(...)
+  let b:anekos_runes_enabled = 1
 
-  if a:0 > 0 && a:1 != ""
+  if a:0 > 0
     if !has_key(s:runes, a:1)
       echoerr "Unknown rune: " . a:1
       return
     endif
     let s:rune_name = a:1
-    let b:anekos_runes_enabled = 1
-  else
-    let b:anekos_runes_enabled = !b:anekos_runes_enabled
   endif
 
+  augroup anekos_runes
+    autocmd!
+    autocmd InsertCharPre <buffer> let v:char = s:runes(s:rune_name, v:char)
+  augroup END
+  echomsg "Rune Input Mode: on (" . s:rune_name . ")"
+endfunction
+
+function s:stop()
+  let b:anekos_runes_enabled = 0
+  autocmd! anekos_runes
+  echomsg "Rune Input Mode: off"
+endfunction
+
+function! s:toggle()
+  if !exists('b:anekos_runes_enabled')
+    let b:anekos_runes_enabled = 0
+  endif
+
+  let b:anekos_runes_enabled = !b:anekos_runes_enabled
   if b:anekos_runes_enabled
-    augroup anekos_runes
-      autocmd!
-      autocmd InsertCharPre <buffer> let v:char = s:runes(s:rune_name, v:char)
-    augroup END
-    echomsg "Rune Input Mode: on (" . s:rune_name . ")"
+    call s:start()
   else
-    autocmd! anekos_runes
-    echomsg "Rune Input Mode: off"
+    call s:stop()
+  endif
+endfunction
+
+function! s:runes_command(bang, name)
+  if a:bang
+    call s:stop()
+  else
+    if a:name == ""
+      call s:start()
+    else
+      call s:start(a:name)
+    endif
   endif
 endfunction
 
@@ -180,8 +201,10 @@ function! s:rune_name_completer(arg_lead, command_line, cursor_pos)
   return "german\nanglosaxon\ndenmark\nsweden"
 endfunction
 
-command! -nargs=? -complete=custom,<SID>rune_name_completer Runes call <SID>toggle(<q-args>)
+command! -nargs=? -bang -complete=custom,<SID>rune_name_completer Runes call <SID>runes_command('!' == '<bang>', <q-args>)
 
-inoremap <Plug>(anekos_runes_toggle) <C-o>:call <SID>toggle()<CR>
-inoremap <Plug>(anekos_runes_toggle_german) <C-o>:call <SID>toggle("german")<CR>
-inoremap <Plug>(anekos_runes_toggle_anglosaxon) <C-o>:call <SID>toggle("anglosaxon")<CR>
+inoremap <Plug>(runes_toggle) <C-o>:call <SID>toggle()<CR>
+inoremap <Plug>(runes_start_german) <C-o>:call <SID>start("german")<CR>
+inoremap <Plug>(runes_start_anglosaxon) <C-o>:call <SID>start("anglosaxon")<CR>
+inoremap <Plug>(runes_start_denmark) <C-o>:call <SID>start("denmark")<CR>
+inoremap <Plug>(runes_start_sweden) <C-o>:call <SID>start("sweden")<CR>
