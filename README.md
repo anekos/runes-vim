@@ -1,6 +1,7 @@
 ## ᚱᚢᛅᛖ-ᛒᛁᛗ
 
 For input unicode rune characters.
+Input "anekos" to output "ᚫᛅᛖᚲᛟᛊ".
 
 ## Command
 
