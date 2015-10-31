@@ -1,5 +1,5 @@
 " NEW BSD LICENSE {{{
-" Copyright (c) 2012, anekos.
+" Copyright (c) 2012-2015, anekos.
 " All rights reserved.
 "
 " Redistribution and use in source and binary forms, with or without modification,
@@ -145,10 +145,41 @@ let s:runes = {
 \     'm': 'ᛙ',
 \     'l': 'ᛚ',
 \     'R': 'ᛧ'
+\   },
+\   'new_britannia': {
+\     'a': 'ᚨ',
+\     'b': 'ᛒ',
+\     'c': 'ᚳ',
+\     'd': 'ᛞ',
+\     'e': 'ᛖ',
+\     'f': 'ᚠ',
+\     'g': 'ᚷ',
+\     'h': 'ᚺ',
+\     'H': 'ᚻ',
+\     'i': 'ᛁ',
+\     'j': 'ᚼ',
+\     'k': 'ᚲ',
+\     'l': 'ᛚ',
+\     'm': 'ᛗ',
+\     'n': 'ᚾ',
+\     'o': 'ᚩ',
+\     'p': 'ᛈ',
+\     'q': 'ᚴ',
+\     'r': 'ᚱ',
+\     's': 'ᛋ',
+\     't': 'ᛏ',
+\     'u': 'ᚢ',
+\     'v': 'ᚢ',
+\     'w': 'ᚹ',
+\     'x': 'ᛦ',
+\     'y': 'ᚣ',
+\     'z': 'ᚹ'
 \   }
 \}
-" G: N -> ng, T -> th
-
+" german:
+"   N -> ng, T -> th
+" new_britannia:
+"   ᚢ (v) is the variant of uruz (u)
 " }}}
 
 " Variables {{{
@@ -243,6 +274,7 @@ inoremap <Plug>(runes_start_german) <C-o>:call <SID>start("german")<CR>
 inoremap <Plug>(runes_start_anglosaxon) <C-o>:call <SID>start("anglosaxon")<CR>
 inoremap <Plug>(runes_start_denmark) <C-o>:call <SID>start("denmark")<CR>
 inoremap <Plug>(runes_start_sweden) <C-o>:call <SID>start("sweden")<CR>
+inoremap <Plug>(runes_start_new_britannia) <C-o>:call <SID>start("new_britannia")<CR>
 
 " }}}
 
