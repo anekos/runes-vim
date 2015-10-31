@@ -12,6 +12,7 @@ Input "anekos" to output "ᚫᛅᛖᚲᛟᛊ".
     :Runes anglosaxon
     :Runes denmark
     :Runes sweden
+    :Runes new_britannia
 
 #### Stop
 
